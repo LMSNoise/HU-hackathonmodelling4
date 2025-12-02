@@ -5,11 +5,12 @@ import testdata from "../data/testdata.json";
 export interface IIncident {
     id: number;
     description: string;
-    classification: number;
+    classification: number | null;
     resolved: boolean;
     reported: boolean;
     location: string;
     licenseplate: string;
+    videourl: string | null;
 }
 
 
@@ -27,7 +28,7 @@ export default function LogList() {
   }, []);
 
   return (
-    <div className="p-4 space-y-2">
+    <div className="flex flex-wrap gap-4 justify-center">
       {incidents.map((incident) => (
         <IncidentLine key={incident.id} incident={incident} />
       ))}
