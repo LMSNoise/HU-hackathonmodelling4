@@ -56,7 +56,7 @@ export default function LogList() {
           <option value="5">Class 5</option>
         </select>
     <div className="flex flex-wrap gap-4 justify-center">
-      {incidents.map((incident) => (
+      {filteredIncidents.map((incident) => (
         <IncidentLine key={incident.id} incident={incident} />
       ))}
     </div>
