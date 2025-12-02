@@ -57,7 +57,7 @@ export function IncidentLine({ incident }: { incident: IIncident }) {
             {incident.classification === 0 && (
                 <span className="flex gap-2 w-full">
                     <select 
-                    className="bg-black w-full"
+                    className="w-full"
                     onChange={(e) => setSelectedClass(Number(e.target.value))}>
                         <option value="">Select classification</option>
                         <option value="1">class 1</option>
