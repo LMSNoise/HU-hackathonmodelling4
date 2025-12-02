@@ -54,7 +54,7 @@ export function IncidentLine({ incident }: { incident: IIncident }) {
             <div><strong>ID:</strong> {incident.id}</div>
             <div><strong>Reported license plate:</strong> {incident.licensePlate}</div>
             <div><strong>Incident Classification:</strong> {classification}</div>
-            {incident.classification === null && (
+            {incident.classification === 0 && (
                 <span className="flex gap-2 w-full">
                     <select 
                     className="bg-black w-full"
@@ -64,10 +64,11 @@ export function IncidentLine({ incident }: { incident: IIncident }) {
                         <option value="2">class 2</option>
                         <option value="3">class 3</option>
                         <option value="4">class 4</option>
+                        <option value="5">class 5</option>
                     </select>
                     
                     <button
-                    disabled={loading || selectedClass === null || incident.classification !== null}
+                    disabled={loading || selectedClass === null}
                     onClick={applyClassification}>
                         Apply
                     </button>
