@@ -8,9 +8,10 @@ export interface IIncident {
     classification: number | null;
     resolved: boolean;
     reported: boolean;
+    performedActions: string[];
     location: string;
-    licenseplate: string;
-    videourl: string | null;
+    licensePlate: string;
+    videoUrl: string | null;
 }
 
 
@@ -19,10 +20,15 @@ export default function LogList() {
 
   useEffect(() => {
     async function load() {
-    //   const res = await fetch("/api/incidents");
-    //   const data: IIncident[] = await res.json();
-      const data: IIncident[] = testdata;
-      setIncidents(data);
+        try{
+            const res = await fetch("http://localhost:8080/api/incidents");
+            if (!res.ok) throw new Error(`HTTP error! Status ${res.status}`);
+            const data: IIncident[] = await res.json();
+            setIncidents(data);
+        }
+        catch (error){
+            console.error("Failed to fetch incidents", error);
+        }
     }
     load();
   }, []);

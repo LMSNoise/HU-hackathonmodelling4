@@ -8,8 +8,8 @@ export function IncidentLine({ incident }: { incident: IIncident }) {
     const [classification, setClassification] = useState(incident.classification)
 
     async function openVideo(){
-        if (incident.videourl === null) return;
-        window.open(encodeURI(incident.videourl));
+        if (incident.videoUrl === null) return;
+        window.open(encodeURI(incident.videoUrl));
     }
 
     async function applyClassification(){
@@ -18,17 +18,33 @@ export function IncidentLine({ incident }: { incident: IIncident }) {
         setLoading(true);
 
         try{
-            // const response = await fetch()
-            const response = {ok: true}
+             const response = await fetch("/api/incidents/classify", {
+                method: "PUT",
+                headers: {
+                "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                description: incident.description,
+                classification: selectedClass,
+                resolved: incident.resolved,
+                location: incident.location,
+                reported: incident.reported,
+                licensePlate: incident.licensePlate,
+                performedAction: incident.performedActions,
+                videoUrl: incident.videoUrl
+                })
+            });
             if(!response.ok){
-            
+                throw new Error("failed to apply classification")
             } else{
                 setClassification(selectedClass)
                 
             }
         }
-        catch{
-
+        catch(error){
+            console.error(error);
+        } finally{
+            setLoading(false);
         }
 
     }
@@ -36,7 +52,7 @@ export function IncidentLine({ incident }: { incident: IIncident }) {
      return (
         <div className="border rounded p-4 w-80 flex flex-col gap-2 text-left">
             <div><strong>ID:</strong> {incident.id}</div>
-            <div><strong>Reported license plate:</strong> {incident.licenseplate}</div>
+            <div><strong>Reported license plate:</strong> {incident.licensePlate}</div>
             <div><strong>Incident Classification:</strong> {classification}</div>
             {incident.classification === null && (
                 <span className="flex gap-2 w-full">
@@ -51,7 +67,7 @@ export function IncidentLine({ incident }: { incident: IIncident }) {
                     </select>
                     
                     <button
-                    disabled={loading || selectedClass === null}
+                    disabled={loading || selectedClass === null || incident.classification !== null}
                     onClick={applyClassification}>
                         Apply
                     </button>
@@ -59,7 +75,7 @@ export function IncidentLine({ incident }: { incident: IIncident }) {
                 
             )}
             <div><strong>Incident Description:</strong> {incident.description}</div>
-            {incident.videourl != null && (
+            {incident.videoUrl != null && (
                 <button
                 onClick={openVideo}>
                     View video
