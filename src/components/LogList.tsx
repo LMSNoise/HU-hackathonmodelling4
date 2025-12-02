@@ -17,6 +17,7 @@ export interface IIncident {
 
 export default function LogList() {
   const [incidents, setIncidents] = useState<IIncident[]>([]);
+  const [filterClass, setFilterClass] = useState<number | "all">("all");
 
   useEffect(() => {
     async function load() {
@@ -33,11 +34,32 @@ export default function LogList() {
     load();
   }, []);
 
+  const filteredIncidents = incidents.filter((inc) => 
+        filterClass === "all" ? true : inc.classification === filterClass);
+
   return (
+    <>
+     <select
+          id="classificationFilter"
+          value={filterClass}
+          onChange={(e) =>
+            setFilterClass(
+              e.target.value === "all" ? "all" : Number(e.target.value)
+            )
+          }
+        >
+          <option value="all">All</option>
+          <option value="1">Class 1</option>
+          <option value="2">Class 2</option>
+          <option value="3">Class 3</option>
+          <option value="4">Class 4</option>
+          <option value="5">Class 5</option>
+        </select>
     <div className="flex flex-wrap gap-4 justify-center">
       {incidents.map((incident) => (
         <IncidentLine key={incident.id} incident={incident} />
       ))}
     </div>
+    </>
   );
 }
