@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "description": "Suspicious vehicle parked near loading dock.",
+    "classification": 2,
+    "resolved": false,
+    "reported": true,
+    "location": "North Lot - Dock 3",
+    "licenseplate": "ABC-3921"
+  },
+  {
+    "id": 2,
+    "description": "Unauthorized individual tailgated into building.",
+    "classification": 4,
+    "resolved": false,
+    "reported": false,
+    "location": "Main Entrance",
+    "licenseplate": "N/A"
+  },
+  {
+    "id": 3,
+    "description": "Employee injury due to equipment malfunction.",
+    "classification": 5,
+    "resolved": true,
+    "reported": true,
+    "location": "Warehouse A – Conveyor 7",
+    "licenseplate": "N/A"
+  },
+  {
+    "id": 4,
+    "description": "Delivery truck collided with loading bay pillar.",
+    "classification": 3,
+    "resolved": false,
+    "reported": true,
+    "location": "South Loading Bay",
+    "licenseplate": "TRK-8824"
+  },
+  {
+    "id": 5,
+    "description": "Fire alarm triggered by overheating battery unit.",
+    "classification": 5,
+    "resolved": true,
+    "reported": true,
+    "location": "Battery Room",
+    "licenseplate": "N/A"
+  },
+  {
+    "id": 6,
+    "description": "Fire alarm triggered by overheating battery unit.",
+    "classification": null,
+    "resolved": true,
+    "reported": true,
+    "location": "Battery Room",
+    "licenseplate": "N/A"
+  }
+]
