@@ -49,6 +49,7 @@ export default function LogList() {
           }
         >
           <option value="all">All</option>
+          <option value="0">Class 0</option>
           <option value="1">Class 1</option>
           <option value="2">Class 2</option>
           <option value="3">Class 3</option>
